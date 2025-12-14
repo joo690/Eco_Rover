@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Parte Meccanica - Eco Rover</title>
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicons -->
+    <link href="assets/img/favicon.png" rel="icon" />
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Vendor CSS Files -->
+    <link
+      href="assets/vendor/bootstrap/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="assets/vendor/bootstrap-icons/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link href="assets/vendor/aos/aos.css" rel="stylesheet" />
+
+    <!-- Main CSS File -->
+    <link href="assets/css/main.css" rel="stylesheet" />
+
+    <style>
+      /* Header styling when not fixed */
+      .header {
+        background-color: rgba(220, 53, 69, 0.95) !important;
+        backdrop-filter: blur(10px);
+      }
+      body {
+        background: linear-gradient(
+          135deg,
+          #fff5f5 0%,
+          #ffe0e0 50%,
+          #ffcccc 100%
+        );
+        background-attachment: fixed;
+      }
+
+      #models {
+        background: transparent;
+      }
+
+      .model-viewer-container {
+        background: linear-gradient(135deg, #ffffff 0%, #fff5f5 100%);
+        border-radius: 12px;
+        padding: 25px;
+        margin-bottom: 30px;
+        box-shadow: 0 4px 15px rgba(220, 53, 69, 0.15);
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        border: 2px solid transparent;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .model-viewer-container::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(
+          90deg,
+          #dc3545 0%,
+          #ff6b6b 50%,
+          #dc3545 100%
+        );
+        background-size: 200% 100%;
+        animation: industrialFlow 3s linear infinite;
+      }
+
+      @keyframes industrialFlow {
+        0% {
+          background-position: 0% 0%;
+        }
+        100% {
+          background-position: 200% 0%;
+        }
+      }
+
+      .model-viewer-container:hover {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 8px 30px rgba(220, 53, 69, 0.3);
+        border-color: rgba(220, 53, 69, 0.3);
+      }
+
+      .model-viewer-container h4 {
+        margin-bottom: 18px;
+        color: #b02a37;
+        font-weight: 700;
+        font-size: 1.3rem;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .model-viewer-container h4::before {
+        content: "⚙️";
+        font-size: 1.5rem;
+      }
+
+      model-viewer {
+        width: 100%;
+        height: 450px;
+        background: linear-gradient(135deg, #ffffff 0%, #fff8f8 100%);
+        border-radius: 10px;
+        border: 1px solid rgba(220, 53, 69, 0.1);
+      }
+
+      .page-header {
+        padding: 120px 0 70px;
+        background: linear-gradient(
+          135deg,
+          #dc3545 0%,
+          #ff6b6b 50%,
+          #dc3545 100%
+        );
+        background-size: 200% 200%;
+        animation: gradientShift 8s ease infinite;
+        color: white;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      @keyframes gradientShift {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      .page-header::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: repeating-linear-gradient(
+          45deg,
+          transparent,
+          transparent 10px,
+          rgba(255, 255, 255, 0.05) 10px,
+          rgba(255, 255, 255, 0.05) 20px
+        );
+        pointer-events: none;
+        opacity: 0.3;
+      }
+
+      .page-header h1 {
+        font-size: 3.5rem;
+        margin-bottom: 1rem;
+        font-weight: 800;
+        text-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        position: relative;
+        z-index: 1;
+      }
+
+      .page-header p {
+        font-size: 1.2rem;
+        opacity: 0.95;
+        position: relative;
+        z-index: 1;
+      }
+
+      .page-header .container::before {
+        content: "⚙️";
+        font-size: 4rem;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        opacity: 0.1;
+      }
+
+      .back-button {
+        margin-bottom: 40px;
+      }
+
+      .back-button .btn {
+        background: linear-gradient(135deg, #dc3545 0%, #ff6b6b 100%);
+        color: white;
+        border: none;
+        padding: 12px 30px;
+        border-radius: 50px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
+      }
+
+      .back-button .btn:hover {
+        transform: translateX(-5px);
+        box-shadow: 0 6px 20px rgba(220, 53, 69, 0.4);
+      }
+
+      .empty-state {
+        text-align: center;
+        padding: 80px 20px;
+        background: linear-gradient(135deg, #ffffff 0%, #fff5f5 100%);
+        border-radius: 16px;
+        box-shadow: 0 8px 25px rgba(220, 53, 69, 0.1);
+        border: 2px dashed rgba(220, 53, 69, 0.2);
+      }
+
+      .empty-state i {
+        font-size: 5rem;
+        margin-bottom: 25px;
+        background: linear-gradient(135deg, #dc3545 0%, #ff6b6b 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .empty-state h3 {
+        color: #b02a37;
+        font-weight: 700;
+        margin-bottom: 15px;
+      }
+
+      .empty-state p {
+        color: #6c757d;
+        font-size: 1.1rem;
+      }
+
+      .image-container {
+        background: linear-gradient(135deg, #ffffff 0%, #fff5f5 100%);
+        border-radius: 12px;
+        padding: 25px;
+        margin-bottom: 30px;
+        box-shadow: 0 4px 15px rgba(220, 53, 69, 0.15);
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        border: 2px solid transparent;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .image-container::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(
+          90deg,
+          #dc3545 0%,
+          #ff6b6b 50%,
+          #dc3545 100%
+        );
+        background-size: 200% 100%;
+        animation: industrialFlow 3s linear infinite;
+      }
+
+      .image-container:hover {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 8px 30px rgba(220, 53, 69, 0.3);
+        border-color: rgba(220, 53, 69, 0.3);
+      }
+
+      .image-container h4 {
+        margin-bottom: 18px;
+        color: #b02a37;
+        font-weight: 700;
+        font-size: 1.3rem;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-shrink: 0;
+      }
+
+      .image-container h4::before {
+        content: "⚙️";
+        font-size: 1.5rem;
+      }
+
+      .image-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        border-radius: 10px;
+        background: linear-gradient(135deg, #ffffff 0%, #fff8f8 100%);
+        width: 100%;
+        height: 400px;
+      }
+
+      .image-container img {
+        max-width: 100%;
+        max-height: 100%;
+        width: auto;
+        height: auto;
+        object-fit: contain;
+        border-radius: 10px;
+        border: 1px solid rgba(220, 53, 69, 0.1);
+        transition: transform 0.3s ease;
+        display: block;
+      }
+
+      .image-container:hover img {
+        transform: scale(1.02);
+      }
+
+      /* Responsive Styles */
+      @media (max-width: 1199px) {
+        .page-header {
+          padding: 100px 0 50px;
+        }
+        .page-header h1 {
+          font-size: 2.5rem;
+        }
+        .model-viewer-container {
+          padding: 20px;
+        }
+        model-viewer {
+          height: 350px;
+        }
+        .image-container {
+          padding: 20px;
+        }
+        .image-wrapper {
+          height: 350px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .page-header {
+          padding: 80px 0 40px;
+        }
+        .page-header h1 {
+          font-size: 2rem;
+        }
+        .page-header p {
+          font-size: 1rem;
+        }
+        .model-viewer-container {
+          padding: 15px;
+          margin-bottom: 20px;
+        }
+        .model-viewer-container h4 {
+          font-size: 1.1rem;
+        }
+        model-viewer {
+          height: 300px;
+        }
+        .image-container {
+          padding: 15px;
+          margin-bottom: 20px;
+        }
+        .image-container h4 {
+          font-size: 1.1rem;
+        }
+        .image-wrapper {
+          height: 300px;
+        }
+        .back-button {
+          margin-bottom: 25px;
+        }
+      }
+
+      @media (max-width: 576px) {
+        .page-header h1 {
+          font-size: 1.75rem;
+        }
+        .page-header p {
+          font-size: 0.9rem;
+        }
+        .model-viewer-container {
+          padding: 12px;
+        }
+        model-viewer {
+          height: 250px;
+        }
+        .image-container {
+          padding: 12px;
+        }
+        .image-container h4 {
+          font-size: 1rem;
+        }
+        .image-wrapper {
+          height: 250px;
+        }
+      }
+
+      /* Mobile Navigation Fix */
+      @media (max-width: 1199px) {
+        .mobile-nav-toggle {
+          display: block !important;
+          cursor: pointer;
+          z-index: 9999;
+        }
+        .header {
+          padding: 10px 0;
+        }
+      }
+
+      /* Language Toggle Button */
+      #lang-toggle {
+        position: fixed;
+        top: 80px;
+        right: 20px;
+        z-index: 9998;
+        background: rgba(220, 53, 69, 0.9);
+        color: white;
+        border: 2px solid white;
+        padding: 10px 20px;
+        border-radius: 25px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      #lang-toggle:hover {
+        background: rgba(220, 53, 69, 1);
+        transform: scale(1.05);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+      }
+
+      @media (max-width: 1199px) {
+        #lang-toggle {
+          top: 70px;
+          right: 60px;
+          padding: 8px 16px;
+          font-size: 0.9rem;
+        }
+      }
+
+      @media (max-width: 768px) {
+        #lang-toggle {
+          top: 70px;
+          right: 15px;
+          padding: 8px 16px;
+          font-size: 0.9rem;
+        }
+      }
+    </style>
+  </head>
+
+  <body class="index-page">
+    <header id="header" class="header d-flex align-items-center">
+      <div
+        class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between"
+      >
+        <a href="index.html" class="logo d-flex align-items-center">
+          <h1 class="sitename">Eco Rover</h1>
+        </a>
+
+        <nav id="navmenu" class="navmenu">
+          <ul>
+            <li><a href="index.html" data-i18n="home">Home</a></li>
+            <li>
+              <a
+                href="parte-meccanica.html"
+                class="active"
+                data-i18n="parteMeccanica"
+                >Mechanical Part</a
+              >
+            </li>
+          </ul>
+        </nav>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </div>
+    </header>
+
+    <!-- Language Toggle Button -->
+    <button id="lang-toggle" data-lang="it">IT</button>
+
+    <main class="main">
+      <!-- Page Header -->
+      <section class="page-header">
+        <div class="container" style="position: relative">
+          <h1>
+            <i class="bi bi-gear-fill"></i>
+            <span data-i18n="meccanicaHeader">Mechanical Part</span>
+          </h1>
+          <p data-i18n="meccanicaSubtitle">Mechanical Design & Engineering</p>
+          <p
+            style="font-size: 1rem; margin-top: 15px; opacity: 0.9"
+            data-i18n="meccanicaDesc"
+          >
+            Discover the mechanical systems that enable Eco Rover's movement,
+            collection mechanisms, and structural components
+          </p>
+        </div>
+      </section>
+
+      <!-- 3D Models Section -->
+      <section id="models" class="section">
+        <div class="container">
+          <div class="back-button">
+            <a href="index.html" class="btn btn-outline-primary">
+              <i class="bi bi-arrow-left"></i>
+              <span data-i18n="backHome">Back to Home</span>
+            </a>
+          </div>
+
+          <div class="row">
+            <div
+              class="col-lg-6 col-md-6"
+              data-aos="fade-up"
+              data-aos-delay="100"
+            >
+              <div class="model-viewer-container">
+                <h4 data-i18n="roboticArm">3D Robotic Arm</h4>
+                <model-viewer
+                  src="assets/3d models/black_honey_robotic_arm.glb"
+                  alt="Robotic Arm"
+                  camera-controls
+                  auto-rotate
+                  interaction-policy="allow-when-focused"
+                >
+                </model-viewer>
+              </div>
+            </div>
+
+            <div
+              class="col-lg-6 col-md-6"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
+              <div class="model-viewer-container">
+                <h4 data-i18n="wheel">Wheel</h4>
+                <model-viewer
+                  src="assets/3d models/free_wheel.glb"
+                  alt="Wheel"
+                  camera-controls
+                  auto-rotate
+                  interaction-policy="allow-when-focused"
+                >
+                </model-viewer>
+              </div>
+            </div>
+
+            <div
+              class="col-lg-6 col-md-6"
+              data-aos="fade-up"
+              data-aos-delay="300"
+            >
+              <div class="image-container">
+                <h4 data-i18n="model3d">3D Model</h4>
+                <div class="image-wrapper">
+                  <img
+                    src="assets/img/meccanica/WhatsApp Image 2025-12-14 at 8.29.22 PM.jpeg"
+                    alt="3D Model"
+                    class="img-fluid"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="col-lg-6 col-md-6"
+              data-aos="fade-up"
+              data-aos-delay="400"
+            >
+              <div class="image-container">
+                <h4 data-i18n="roboticArm2">Robotic Arm 2</h4>
+                <div class="image-wrapper">
+                  <img
+                    src="assets/img/meccanica/WhatsApp Image 2025-12-14 at 8.29.23 PM.jpeg"
+                    alt="Robotic arm 2"
+                    class="img-fluid"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- /3D Models Section -->
+    </main>
+
+    <footer id="footer" class="footer dark-background">
+      <div class="container">
+        <h3 class="sitename">Eco Rover</h3>
+        <p data-i18n="footerDesc">
+          Eco Rover - Autonomous waste collection robot for streets and closed
+          environments
+        </p>
+        <div class="container">
+          <div class="copyright">
+            <span data-i18n="copyright">Copyright</span>
+            <strong class="px-1 sitename">Eco Rover</strong>
+            <span data-i18n="allRights">All Rights Reserved</span>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scroll Top -->
+    <a
+      href="#"
+      id="scroll-top"
+      class="scroll-top d-flex align-items-center justify-content-center"
+      ><i class="bi bi-arrow-up-short"></i
+    ></a>
+
+    <!-- Preloader -->
+    <div id="preloader"></div>
+
+    <!-- Vendor JS Files -->
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/aos/aos.js"></script>
+    <script
+      type="module"
+      src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js"
+    ></script>
+
+    <!-- Language JS File -->
+    <script src="assets/js/language.js"></script>
+    <!-- Main JS File -->
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>
